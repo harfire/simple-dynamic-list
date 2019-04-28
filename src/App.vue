@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <SimpleList msg="Simple Dynamic List"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SimpleList from './components/SimpleList.vue'
 
 export default {
-  name: 'app',
+  name: 'simple-list',
   components: {
-    HelloWorld
+    SimpleList
   }
 }
 </script>
