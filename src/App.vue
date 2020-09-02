@@ -1,22 +1,22 @@
 <template>
   <div id="app">
-    <SimpleList msg="Simple Dynamic List"/>
+    <SimpleList msg="Simple Dynamic List" />
   </div>
 </template>
 
 <script>
-import SimpleList from './components/SimpleList.vue'
+import SimpleList from './components/SimpleList.vue';
 
 export default {
   name: 'simple-list',
   components: {
     SimpleList
   }
-}
+};
 </script>
 
 <style lang="scss">
-@import "./assets/sass/main.scss";
+@import './assets/sass/main.scss';
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

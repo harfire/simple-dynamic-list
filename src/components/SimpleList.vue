@@ -17,7 +17,7 @@
             </div>
           </template>
           <div class="filter-cont">
-            <a @click.prevent="showFilterProp()" class="button" :class="[ showFilter ? '' : 'is-primary' ]">
+            <a @click.prevent="showFilterProp()" class="button" :class="[showFilter ? '' : 'is-primary']">
               <template v-if="showFilter">Hide</template>
               <template v-else>Filter</template>
             </a>
@@ -37,9 +37,9 @@
               <template v-if="showFilter">
                 <tr>
                   <td></td>
-                  <td><input class="input" type="text" v-model="searchTitle" placeholder="Keyword"></td>
+                  <td><input class="input" type="text" v-model="searchTitle" placeholder="Keyword" /></td>
                   <td></td>
-                  <td><input class="input" type="text" v-model="searchGenre" placeholder="Keyword"></td>
+                  <td><input class="input" type="text" v-model="searchGenre" placeholder="Keyword" /></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -64,7 +64,7 @@
                   </th>
                   <td>
                     <template v-if="item.update">
-                      <input class="input" type="text" v-model="item.title">
+                      <input class="input" type="text" v-model="item.title" />
                     </template>
                     <template v-else>
                       {{ item.title }}
@@ -72,7 +72,7 @@
                   </td>
                   <td>
                     <template v-if="item.update">
-                      <input class="input" type="number" v-model.number="item.views">
+                      <input class="input" type="number" v-model.number="item.views" />
                     </template>
                     <template v-else>
                       {{ item.views }}
@@ -80,7 +80,7 @@
                   </td>
                   <td>
                     <template v-if="item.update">
-                      <input class="input" type="text" v-model="item.genre">
+                      <input class="input" type="text" v-model="item.genre" />
                     </template>
                     <template v-else>
                       {{ item.genre }}
@@ -88,7 +88,7 @@
                   </td>
                   <td>
                     <template v-if="item.update">
-                      <input class="input" type="text" v-model="item.descriptions">
+                      <input class="input" type="text" v-model="item.descriptions" />
                     </template>
                     <template v-else>
                       <span>{{ truncateText(item.descriptions, 25) }}</span>
@@ -120,9 +120,7 @@
       </div>
       <div class="columns">
         <div class="column">
-          <p class="footer">
-            <strong>Haris Rahman</strong>&nbsp;<small>|</small>&nbsp;<small>+628159156249</small>
-          </p>
+          <p class="footer"><strong>Haris Rahman</strong>&nbsp;<small>|</small>&nbsp;<small>+628159156249</small></p>
         </div>
       </div>
     </div>
@@ -148,7 +146,7 @@ export default {
       searchTitle: '',
       searchGenre: '',
       showNoData: false,
-      loadingUpdate: false,
+      loadingUpdate: false
     };
   },
   computed: {
@@ -156,9 +154,9 @@ export default {
       let filtered = this.movieList;
 
       if (this.searchTitle) {
-        filtered = this.movieList.filter(m => m.title.toLowerCase().indexOf(this.searchTitle) > -1);
+        filtered = this.movieList.filter((m) => m.title.toLowerCase().indexOf(this.searchTitle) > -1);
       } else {
-        filtered = this.movieList.filter(m => m.genre.toLowerCase().indexOf(this.searchGenre) > -1);
+        filtered = this.movieList.filter((m) => m.genre.toLowerCase().indexOf(this.searchGenre) > -1);
       }
 
       if (!filtered.length) {
@@ -168,9 +166,9 @@ export default {
       }
 
       return filtered;
-    },
+    }
   },
-  mounted () {
+  mounted() {
     this.getData();
   },
   methods: {
@@ -180,13 +178,13 @@ export default {
       const urlGetPath = 'https://andywiranata-42555.firebaseio.com/test-frontend/items.json';
       await axios
         .get(urlGetPath)
-        .then(response => {
+        .then((response) => {
           if (response) {
             this.resetStatus(response.data);
             this.loading = false;
           }
         })
-        .catch(error => {
+        .catch((error) => {
           this.errorNotification = true;
           this.errorMessage = error;
           this.loading = false;
@@ -205,7 +203,7 @@ export default {
       return false;
     },
     resetStatus(data = this.movieList) {
-      this.movieList = data.map(val => {
+      this.movieList = data.map((val) => {
         val.tooltip = false;
         val.update = false;
         return val;
@@ -239,35 +237,35 @@ export default {
         title: this.movieList[index].title,
         views: this.movieList[index].views,
         genre: this.movieList[index].genre,
-        descriptions: this.movieList[index].descriptions,
+        descriptions: this.movieList[index].descriptions
       };
       const config = {
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'application/json'
-        },
-      }
+        }
+      };
 
       axios
-      .put(url, data, config)
-      .then(response => {
-        if (response) {
+        .put(url, data, config)
+        .then((response) => {
+          if (response) {
+            this.loadingUpdate = false;
+            this.getData();
+            this.resetStatus();
+          }
+        })
+        .catch((error) => {
+          this.errorNotification = true;
+          this.errorMessage = error;
+          this.loading = false;
           this.loadingUpdate = false;
           this.getData();
           this.resetStatus();
-        }
-      })
-      .catch(error => {
-        this.errorNotification = true;
-        this.errorMessage = error;
-        this.loading = false;
-        this.loadingUpdate = false;
-        this.getData();
-        this.resetStatus();
-      });
-    },
+        });
+    }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -305,7 +303,8 @@ export default {
   color: #fff;
   font-size: 14px;
 }
-.info-icon:hover, .edit-icon:hover {
+.info-icon:hover,
+.edit-icon:hover {
   background: blue;
 }
 .edit-icon {
@@ -342,10 +341,9 @@ export default {
   float: right;
 }
 .desc-tooltip {
-
 }
 .cancel-update {
-  font-size: .7em;
+  font-size: 0.7em;
   font-weight: 600;
 }
 .overlay {
@@ -362,7 +360,7 @@ export default {
   height: 67px;
   left: -12px;
   top: -32px;
-  opacity: .5;
+  opacity: 0.5;
   z-index: 3;
   text-align: center;
   line-height: 70px;
