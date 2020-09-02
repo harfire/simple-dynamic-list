@@ -1,4 +1,4 @@
-# simple-dynamic-list
+# Simple Dynamic List
 
 ## Project setup
 ```
