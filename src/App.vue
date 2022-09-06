@@ -1,19 +1,13 @@
 <template>
   <div id="app">
-    <SimpleList msg="Simple Dynamic List" />
+    <nav>
+      <router-link to="/">
+        Home
+      </router-link>
+    </nav>
+    <router-view />
   </div>
 </template>
-
-<script>
-import SimpleList from './components/SimpleList.vue';
-
-export default {
-  name: 'simple-list',
-  components: {
-    SimpleList
-  }
-};
-</script>
 
 <style lang="scss">
 @import './assets/sass/main.scss';

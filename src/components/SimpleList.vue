@@ -3,21 +3,32 @@
     <div class="container">
       <div class="columns">
         <div class="column">
-          <h1 class="title is-3">{{ msg }}</h1>
-          <p class="space">Using Vuejs Framework</p>
+          <h1 class="title is-3">
+            {{ msg }}
+          </h1>
+          <p class="space">
+            Using Vuejs Framework
+          </p>
         </div>
       </div>
       <div class="columns is-centered">
         <div class="column is-four-fifths">
           <template v-if="errorNotification">
             <div class="notification is-danger">
-              <button @click="errorNotification = false" class="delete"></button>
+              <button
+                class="delete"
+                @click="errorNotification = false"
+              ></button>
               <div>Failed to update data!</div>
               {{ errorMessage }}
             </div>
           </template>
           <div class="filter-cont">
-            <a @click.prevent="showFilterProp()" class="button" :class="[showFilter ? '' : 'is-primary']">
+            <a
+              class="button"
+              :class="[showFilter ? '' : 'is-primary']"
+              @click.prevent="showFilterProp()"
+            >
               <template v-if="showFilter">Hide</template>
               <template v-else>Filter</template>
             </a>
@@ -25,46 +36,94 @@
           <table class="table is-striped is-bordered table-list">
             <thead>
               <tr>
-                <th width="5%">No</th>
-                <th width="23%">Title</th>
-                <th width="12%">Views</th>
-                <th width="22%">Genre</th>
-                <th width="27%">Descriptions</th>
-                <th width="11%">Action</th>
+                <th width="5%">
+                  No
+                </th>
+                <th width="23%">
+                  Title
+                </th>
+                <th width="12%">
+                  Views
+                </th>
+                <th width="22%">
+                  Genre
+                </th>
+                <th width="27%">
+                  Descriptions
+                </th>
+                <th width="11%">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
               <template v-if="showFilter">
                 <tr>
                   <td></td>
-                  <td><input class="input" type="text" v-model="searchTitle" placeholder="Keyword" /></td>
+                  <td>
+                    <input
+                      v-model="searchTitle"
+                      class="input"
+                      type="text"
+                      placeholder="Keyword"
+                    />
+                  </td>
                   <td></td>
-                  <td><input class="input" type="text" v-model="searchGenre" placeholder="Keyword" /></td>
+                  <td>
+                    <input
+                      v-model="searchGenre"
+                      class="input"
+                      type="text"
+                      placeholder="Keyword"
+                    />
+                  </td>
                   <td></td>
                   <td></td>
                 </tr>
               </template>
               <template v-if="showNoData">
                 <tr>
-                  <td class="centered" colspan="6">No Data!</td>
+                  <td
+                    class="centered"
+                    colspan="6"
+                  >
+                    No Data!
+                  </td>
                 </tr>
               </template>
               <template v-if="loading">
                 <tr>
-                  <td class="centered" colspan="6">Loading...</td>
+                  <td
+                    class="centered"
+                    colspan="6"
+                  >
+                    Loading...
+                  </td>
                 </tr>
               </template>
               <template v-else>
-                <tr v-for="(item, index) in filtered" :key="`list-${index}`">
+                <tr
+                  v-for="(item, index) in filtered"
+                  :key="`list-${index}`"
+                >
                   <th>
                     {{ index + 1 }}
-                    <div v-if="item.update && loadingUpdate" class="overlay">
-                      <div class="row">Loading...</div>
+                    <div
+                      v-if="item.update && loadingUpdate"
+                      class="overlay"
+                    >
+                      <div class="row">
+                        Loading...
+                      </div>
                     </div>
                   </th>
                   <td>
                     <template v-if="item.update">
-                      <input class="input" type="text" v-model="item.title" />
+                      <input
+                        v-model="item.title"
+                        class="input"
+                        type="text"
+                      />
                     </template>
                     <template v-else>
                       {{ item.title }}
@@ -72,7 +131,11 @@
                   </td>
                   <td>
                     <template v-if="item.update">
-                      <input class="input" type="number" v-model.number="item.views" />
+                      <input
+                        v-model.number="item.views"
+                        class="input"
+                        type="number"
+                      />
                     </template>
                     <template v-else>
                       {{ item.views }}
@@ -80,7 +143,11 @@
                   </td>
                   <td>
                     <template v-if="item.update">
-                      <input class="input" type="text" v-model="item.genre" />
+                      <input
+                        v-model="item.genre"
+                        class="input"
+                        type="text"
+                      />
                     </template>
                     <template v-else>
                       {{ item.genre }}
@@ -88,28 +155,52 @@
                   </td>
                   <td>
                     <template v-if="item.update">
-                      <input class="input" type="text" v-model="item.descriptions" />
+                      <input
+                        v-model="item.descriptions"
+                        class="input"
+                        type="text"
+                      />
                     </template>
                     <template v-else>
                       <span>{{ truncateText(item.descriptions, 25) }}</span>
-                      <div v-show="item.tooltip === true" class="tooltip">
+                      <div
+                        v-show="item.tooltip === true"
+                        class="tooltip"
+                      >
                         <div class="box">
-                          <a @click.prevent="showTooltip(index, item.tooltip)" class="close-tooltip">&#10006;</a>
-                          <div class="desc-tooltip">{{ item.descriptions }}</div>
+                          <a
+                            class="close-tooltip"
+                            @click.prevent="showTooltip(index, item.tooltip)"
+                          >&#10006;</a>
+                          <div class="desc-tooltip">
+                            {{ item.descriptions }}
+                          </div>
                         </div>
                       </div>
                       <template v-if="showIcon(item.descriptions)">
-                        <a @click.prevent="showTooltip(index, item.tooltip)" class="info-icon">&#8505;</a>
+                        <a
+                          class="info-icon"
+                          @click.prevent="showTooltip(index, item.tooltip)"
+                        >&#8505;</a>
                       </template>
                     </template>
                   </td>
                   <td class="centered">
                     <template v-if="item.update">
-                      <a @click.prevent="updateMovieList(index)" class="button is-primary is-small">Simpan</a>
-                      <a @click.prevent="resetStatus()" class="cancel-update">Batal</a>
+                      <a
+                        class="button is-primary is-small"
+                        @click.prevent="updateMovieList(index)"
+                      >Simpan</a>
+                      <a
+                        class="cancel-update"
+                        @click.prevent="resetStatus()"
+                      >Batal</a>
                     </template>
                     <template v-else>
-                      <a @click="showSaveButton(index)" class="edit-icon">&#9998;</a>
+                      <a
+                        class="edit-icon"
+                        @click="showSaveButton(index)"
+                      >&#9998;</a>
                     </template>
                   </td>
                 </tr>
@@ -120,7 +211,9 @@
       </div>
       <div class="columns">
         <div class="column">
-          <p class="footer"><strong>Haris Rahman</strong>&nbsp;<small>|</small>&nbsp;<small>+628159156249</small></p>
+          <p class="footer">
+            <strong>Haris Rahman</strong>&nbsp;<small>|</small>&nbsp;<small>+628159156249</small>
+          </p>
         </div>
       </div>
     </div>
@@ -154,16 +247,16 @@ export default {
       let filtered = this.movieList;
 
       if (this.searchTitle) {
-        filtered = this.movieList.filter((m) => m.title.toLowerCase().indexOf(this.searchTitle) > -1);
+        filtered = this.movieList.filter(
+          (m) => m.title.toLowerCase().indexOf(this.searchTitle) > -1
+        );
       } else {
-        filtered = this.movieList.filter((m) => m.genre.toLowerCase().indexOf(this.searchGenre) > -1);
+        filtered = this.movieList.filter(
+          (m) => m.genre.toLowerCase().indexOf(this.searchGenre) > -1
+        );
       }
 
-      if (!filtered.length) {
-        this.showNoData = true;
-      } else {
-        this.showNoData = false;
-      }
+      this.chageFilter(!!filtered.length);
 
       return filtered;
     }
@@ -172,10 +265,14 @@ export default {
     this.getData();
   },
   methods: {
+    chageFilter(value) {
+      this.showNoData = value;
+    },
     async getData() {
       this.loading = true;
 
-      const urlGetPath = 'https://andywiranata-42555.firebaseio.com/test-frontend/items.json';
+      const urlGetPath =
+        'https://andywiranata-42555.firebaseio.com/test-frontend/items.json';
       await axios
         .get(urlGetPath)
         .then((response) => {
@@ -200,6 +297,7 @@ export default {
       if (string.length > 30) {
         return true;
       }
+
       return false;
     },
     resetStatus(data = this.movieList) {
@@ -220,7 +318,7 @@ export default {
 
       this.movieList[index].update = !this.movieList[index].update;
     },
-    showFilterProp(index) {
+    showFilterProp() {
       this.resetStatus();
 
       // Reset filtered item
@@ -232,7 +330,8 @@ export default {
     updateMovieList(index) {
       this.loadingUpdate = true;
 
-      const url = 'https://andywiranata-42555.firebaseio.com/test-frontend/items/0.json';
+      const url =
+        'https://andywiranata-42555.firebaseio.com/test-frontend/items/0.json';
       const data = {
         title: this.movieList[index].title,
         views: this.movieList[index].views,
@@ -339,8 +438,6 @@ export default {
 .close-tooltip {
   display: inline-block;
   float: right;
-}
-.desc-tooltip {
 }
 .cancel-update {
   font-size: 0.7em;
